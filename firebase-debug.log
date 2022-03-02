@@ -1,0 +1,62 @@
+[debug] [2022-02-28T21:04:57.069Z] ----------------------------------------------------------------------
+[debug] [2022-02-28T21:04:57.071Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\carlo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2022-02-28T21:04:57.071Z] CLI Version:   10.2.1
+[debug] [2022-02-28T21:04:57.071Z] Platform:      win32
+[debug] [2022-02-28T21:04:57.071Z] Node Version:  v16.13.2
+[debug] [2022-02-28T21:04:57.072Z] Time:          Mon Feb 28 2022 16:04:57 GMT-0500 (hora estándar de Colombia)
+[debug] [2022-02-28T21:04:57.072Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-02-28T21:04:57.114Z] Field ".emulators.database.port" in "firebase.json" is possibly invalid: should be number
+[debug] [2022-02-28T21:04:57.118Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-02-28T21:04:57.118Z] > authorizing via signed-in user (carlos.815t@gmail.com)
+[info] i  emulators: Starting emulators: firestore, database {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: firestore, database"}}
+[debug] [2022-02-28T21:04:57.141Z] [hub] writing locator at C:\Users\carlo\AppData\Local\Temp\hub-chat-app-cbeea.json
+[debug] [2022-02-28T21:04:57.151Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2022-02-28T21:04:57.152Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-02-28T21:04:57.152Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\carlo\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.13.1.jar","--host","localhost","--port",8080,"--rules","C:\\Users\\carlo\\Developer\\eth-chat\\firestore.rules"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\carlo\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.13.1.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--rules\",\"C:\\\\Users\\\\carlo\\\\Developer\\\\eth-chat\\\\firestore.rules\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2022-02-28T21:04:58.441Z] > refreshing access token with scopes: []
+[debug] [2022-02-28T21:04:58.442Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-02-28T21:04:58.668Z] <<< HTTP RESPONSE 200 {"date":"Mon, 28 Feb 2022 21:04:57 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-02-28T21:04:58.674Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/chat-app-cbeea [none]
+[debug] [2022-02-28T21:04:59.004Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/chat-app-cbeea 200
+[debug] [2022-02-28T21:04:59.004Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/chat-app-cbeea {"projectId":"chat-app-cbeea","projectNumber":"752715060142","displayName":"chat-app","name":"projects/chat-app-cbeea","resources":{"hostingSite":"chat-app-cbeea","realtimeDatabaseInstance":"chat-app-cbeea-default-rtdb","storageBucket":"chat-app-cbeea.appspot.com","locationId":"us-central"},"state":"ACTIVE"}
+[debug] [2022-02-28T21:04:59.005Z] database rules config:  [{"instance":"chat-app-cbeea-default-rtdb","rules":"C:\\Users\\carlo\\Developer\\eth-chat\\database.rules.json"}]
+[debug] [2022-02-28T21:04:59.006Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2022-02-28T21:04:59.006Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-02-28T21:04:59.006Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2022-02-28T21:04:59.006Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\carlo\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.7.3.jar","--host","localhost","--port",6969],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\carlo\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.7.3.jar\",\"--host\",\"localhost\",\"--port\",6969],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\"],\"joinArgs\":false}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2022-02-28T21:05:00.559Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-02-28T21:05:00.559Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-02-28T21:05:00.559Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\carlo\\.cache\\firebase\\emulators\\ui-v1.6.5\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\carlo\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.6.5\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-02-28T21:05:00.650Z] Web / API server started at localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
+[debug] [2022-02-28T21:05:00.820Z] >>> HTTP REQUEST PUT http://localhost:6969/.settings/rules.json?ns=chat-app-cbeea-default-rtdb  
+ {
+  "rules": {
+    ".read": "now < 1648616400000",  // 2022-3-30
+    ".write": "now < 1648616400000",  // 2022-3-30
+  }
+}
+[debug] [2022-02-28T21:05:01.084Z] <<< HTTP RESPONSE 200 {"content-length":"15","content-type":"application/json; charset=utf-8","access-control-allow-origin":"*","cache-control":"no-cache","x-firebase-project-id":"chat-app-cbeea-default-rtdb","x-firebase-project-number":"123456789","x-firebase-uuid":"36b1b2dd-a333-40d2-aace-f8b36294e81f"}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4000                │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Firestore │ localhost:8080 │ http://localhost:4000/firestore │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Database  │ localhost:6969 │ http://localhost:4000/database  │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
