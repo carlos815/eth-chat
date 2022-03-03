@@ -35,10 +35,10 @@ export default function Chat() {
             timestamp: nowEpoch()
         }
 
+        setMessage("")
         sendMessage(chatId, _message,
             /*callback*/
             () => {
-                setMessage("")
                 scrollTotheEnd(chatbox)
             }),
             (e) => {
