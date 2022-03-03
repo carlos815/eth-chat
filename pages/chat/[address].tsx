@@ -52,9 +52,7 @@ export default function SSRPage({ data }) {
         const messageRef = ref(db, "chats/messages/" + chatId.toString());
         let newData = {}
         onChildAdded(messageRef, (snapshot) => {
-          const key = snapshot.key
-          const data = snapshot.val()
-          newData = { ...newData, [key]: data }
+          newData = { ...newData, [snapshot.key]: snapshot.val() }
           setAllMessages({ ...allMessages, ...newData });
           scrollTotheEnd(chatbox)
         })
