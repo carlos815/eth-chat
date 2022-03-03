@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { getDatabase, ref, onValue, get } from "firebase/database";
+import { getDatabase, ref, onValue, get, onChildAdded } from "firebase/database";
 import { useUserMetamask } from "../../context/userContextMetamask";
 import { useEffect, useRef, useState } from "react";
 import { getApps } from "firebase/app";
@@ -50,9 +50,12 @@ export default function SSRPage({ data }) {
         //create database observer to update chatbox automatically on change
         const db = getDatabase();
         const messageRef = ref(db, "chats/messages/" + chatId.toString());
-        onValue(messageRef, (snapshot) => {
-          const data = snapshot.val();
-          setAllMessages(data);
+        let newData = {}
+        onChildAdded(messageRef, (snapshot) => {
+          const key = snapshot.key
+          const data = snapshot.val()
+          newData = { ...newData, [key]: data }
+          setAllMessages({ ...allMessages, ...newData });
           scrollTotheEnd(chatbox)
         })
       }
