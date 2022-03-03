@@ -1,19 +1,32 @@
 import { useState, useEffect, createContext, useContext } from 'react'
 import { createFirebaseApp } from '../firebase/clientApp'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { RequestStatus } from '../types/requestStatus'
 import detectEthereumProvider from '@metamask/detect-provider'
+import { RequestStatus } from '../helpers/types'
 
 export const UserMetamaskContext = createContext()
 
 export default function UserMetamaskContextComp({ children }) {
-  const [userMetamask, setUserMetamask] = useState<string>(null)
   const [reqStatus, setReqStatus] = useState<RequestStatus>(RequestStatus.idle)
 
+  const [userMetamask, _setUserMetamask] = useState<string>(null)
+  const setUserMetamask = (user: string) => {
+    _setUserMetamask(user.toLowerCase())
+  }
+
   const makeUserRequest = async () => {
+    if (window?.ethereum?.selectedAddress) {
+      //There's an account already connected. No need to request anything
+      setUserMetamask(window.ethereum.selectedAddress)
+      setReqStatus(RequestStatus.success)
+      return
+    }
+
+
     //REquest a metamask address
     setReqStatus(RequestStatus.loading)
     const provider = await detectEthereumProvider();
+
     if (provider === window.ethereum) {
       //'MetaMask is installed
       console.log("metamask installed")
@@ -37,10 +50,7 @@ export default function UserMetamaskContextComp({ children }) {
 
 
   useEffect(() => {
-    if (window?.ethereum?.selectedAddress) {
-      //There's an account already connected
-      setUserMetamask(window.ethereum.selectedAddress)
-    }
+    makeUserRequest()
   }, [])
 
   return (

@@ -6,37 +6,9 @@ import { useUser } from "../context/userContext";
 import detectEthereumProvider from "@metamask/detect-provider";
 import type { NextPage } from "next";
 import { useUserMetamask } from "../context/userContextMetamask";
-import { RequestStatus } from "../types/requestStatus";
+import { Message, RequestStatus, Chat, Member, User, ChatDb  } from "../helpers/types";
 import { getDatabase, ref, set, onValue, child, get, push, query, off } from "firebase/database";
 import { getApps } from "firebase/app";
-
-export interface ChatDb {
-  chats?: { [key: string]: Chat };
-  members?: { [key: string]: Members };
-  messages?: { [key: string]: { [key: string]: Message } };
-  users?: { [key: string]: User };
-}
-
-export interface Chat {
-  title: string;
-  lastMessage: string;
-  timestamp: number;
-}
-
-export interface Members {
-  [key: string]: boolean;
-}
-
-
-export interface Message {
-  name: string;
-  message: string;
-  timestamp: number;
-}
-
-export interface User {
-  chatsWith: { [key: string]: string }
-}
 
 
 const Home: NextPage = () => {
