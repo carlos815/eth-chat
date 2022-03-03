@@ -50,7 +50,6 @@ export default function SSRPage({ data }) {
         //create database observer to update chatbox automatically on change
         const db = getDatabase();
         const messageRef = ref(db, "chats/messages/" + chatId.toString());
-        const messagesData = await get(messageRef);
         onValue(messageRef, (snapshot) => {
           const data = snapshot.val();
           setAllMessages(data);
