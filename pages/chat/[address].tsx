@@ -7,6 +7,7 @@ import { Message, RequestStatus } from "../../helpers/types";
 import createNewChat from "../../firebase/createNewChat";
 import sendMessage from "../../firebase/sendMessage";
 import nowEpoch from "../../helpers/nowEpoch";
+import scrollTotheEnd from "../../helpers/scrollToTheEnd";
 
 export default function SSRPage({ data }) {
   const { address, profile } = data;
@@ -23,27 +24,23 @@ export default function SSRPage({ data }) {
 
   const handleSendMessage = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
+
     const _message: Message = {
       message: message,
       name: userMetamask,
       timestamp: nowEpoch()
     }
 
-    sendMessage(chatId, _message, () => {
-      setMessage("")
-      scrollTotheEnd(chatbox)
-    })
+    sendMessage(chatId, _message,
+      /*callback*/
+      () => {
+        setMessage("")
+        scrollTotheEnd(chatbox)
+      }),
+      (e) => {
+        /*Error callback*/
+      }
   }
-
-  const scrollTotheEnd = (ref) => {
-    if (ref !== null) {
-      ref.current.scrollTo({
-        top: ref.current.scrollHeight,
-        behavior: 'smooth'
-      })
-    }
-  }
-
 
   useEffect(() => {
     (async () => {
