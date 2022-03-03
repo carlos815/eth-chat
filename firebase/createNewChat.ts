@@ -50,7 +50,7 @@ const createNewChat = async (memberAddresses: [string, string], setChatId: Funct
 
             //new code
             // console.log("chatid", newKey)
-            set(ref(db, "chats/chats/" + newKey), { timestamp: -1 });
+            set(ref(db, "chats/chats/" + newKey), { message: " ", timestamp: -1 });
 
             memberAddresses.forEach((address) => {
                 set(ref(db, "chats/members/" + newKey + "/" + address.toLowerCase()), true)

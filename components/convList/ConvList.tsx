@@ -21,7 +21,7 @@ const ConvList = ({ chatList }) => {
             off(messageRef)
             onValue(messageRef, (snapshot) => {
 
-                if (snapshot.val() == null) return
+                if (snapshot.val().message == null) return
                 const { message, timestamp } = snapshot.val()
 
                 _chatData = {
