@@ -19,11 +19,10 @@ export default function SSRPage({ data }) {
 
   const isFirebaseReady = getApps().length !== 0;
 
-  const chatbox = useRef<null | HTMLDivElement>(null)
+  const chatbox = useRef(null)
 
   const handleSendMessage = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    
     const _message: Message = {
       message: message,
       name: userMetamask,
