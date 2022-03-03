@@ -12,7 +12,7 @@ export default function UserMetamaskContextComp({ children }) {
     _setUserMetamask(user.toLowerCase())
   }
 
-  const makeUserRequest = async () => {
+  const requestUser = async () => {
     setReqStatus(RequestStatus.loading)
 
     const provider = await detectEthereumProvider();
@@ -60,7 +60,7 @@ export default function UserMetamaskContextComp({ children }) {
   }, [])
 
   return (
-    <UserMetamaskContext.Provider value={{ userMetamask, setUserMetamask, reqStatus, makeUserRequest }}>
+    <UserMetamaskContext.Provider value={{ userMetamask, setUserMetamask, reqStatus, requestUser }}>
       {children}
     </UserMetamaskContext.Provider>
   )

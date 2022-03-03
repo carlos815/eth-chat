@@ -8,6 +8,9 @@ import createNewChat from "../../firebase/createNewChat";
 import sendMessage from "../../firebase/sendMessage";
 import nowEpoch from "../../helpers/nowEpoch";
 import scrollTotheEnd from "../../helpers/scrollToTheEnd";
+import Chatbox from "../../components/chat/Chatbox";
+import MessageInput from "../../components/chat/MessageInput";
+import Login from "../../components/Login";
 
 export default function SSRPage({ data }) {
   const { address, profile } = data;
@@ -16,7 +19,7 @@ export default function SSRPage({ data }) {
   const [message, setMessage] = useState<string>("")
   const [allMessages, setAllMessages] = useState<{ [key: string]: Message }>()
 
-  const { reqStatus, userMetamask, makeUserRequest }: any = useUserMetamask()
+  const { reqStatus, userMetamask, requestUser }: any = useUserMetamask()
 
   const isFirebaseReady = getApps().length !== 0;
 
@@ -78,46 +81,15 @@ export default function SSRPage({ data }) {
       </Head>
 
       <main className="p-3 min-h-screen max-h-screen flex flex-col ">
-        <h1 className="title text-3xl font-bold underline">
-          Chat with {address}
-        </h1>
-        {reqStatus === RequestStatus.error && <div>Couln't connect ot metamask</div>}
-        {reqStatus === RequestStatus.loading && <div>Requesting Metamask access</div>}
         {userMetamask ? <>
-          <div className="p-3 rounded bg-slate-100 my-4 flex flex-col grow  overflow-y-auto scroll-m-2.5 scroll-p-64 scrollbar" ref={chatbox}>
-            {allMessages && Object.keys(allMessages).map(function (key, index) {
-
-              //MESSAGE BUBBLE
-              const ownMessage = allMessages[key].name === userMetamask
-
-              return <div className={`bg-white m-2 rounded p-2 w-2/3 ${ownMessage ? "self-start bg-yellow-50" : "self-end bg-green-50"}`} key={key}>
-                <p className="text-xs font-light">{`${allMessages[key]?.name?.slice(0, 8)}(...)`}</p>
-                <p>{allMessages[key].message !== "" ? allMessages[key].message : "  "}</p>
-              </div>
-            })}
-          </div>
-          <form className="my-4 flex gap-x-5 full" >
-
-            <input className="border-slate-300 bg-slate-100 p-2" onChange={(e) => setMessage(e.target.value)} value={message} disabled={!userMetamask}></input>
-            <button
-              className="rounded bg-slate-200 border-2 border-slate-300 px-3 font-bold text-slate-700 disabled:text-slate-300"
-              onClick={handleSendMessage} disabled={message === ""}
-            >
-              Send Message
-            </button>
-
-          </form>
-
+          <h1 className="title text-3xl font-bold underline">
+            Chat with {address}
+          </h1>
+          <Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
+          <MessageInput message={message} disabled={!userMetamask} onChange={(e) => setMessage(e.target.value)} onClick={handleSendMessage} />
         </> :
-          <>  <button
-            className="rounded bg-slate-200 border-2 border-slate-300 px-3 font-bold text-slate-700"
-            onClick={makeUserRequest}
-          >
-            Request Metamask address
-          </button></>
+          <Login />
         }
-
-
       </main>
     </div>
   );
@@ -125,8 +97,6 @@ export default function SSRPage({ data }) {
 
 export const getServerSideProps = async ({ params }) => {
   const { address } = params;
-
-
   return { props: { data: { address: address } } };
 };
 
