@@ -19,26 +19,30 @@ export default function SSRPage({ data }) {
 
   const isFirebaseReady = getApps().length !== 0;
 
-  const chatbox = useRef(null)
+  const chatbox = useRef<null | HTMLDivElement>(null)
 
   const handleSendMessage = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+    
     const _message: Message = {
       message: message,
       name: userMetamask,
       timestamp: nowEpoch()
     }
 
-    const messageSent = await sendMessage(e, setMessage, chatId, _message)
-    if (messageSent) {
+    sendMessage(chatId, _message, () => {
+      setMessage("")
       scrollTotheEnd(chatbox)
-
-    }
-  }
-  const scrollTotheEnd = (ref) => {
-    ref.current.scrollTo({
-      top: ref.current.scrollHeight,
-      behavior: 'smooth'
     })
+  }
+
+  const scrollTotheEnd = (ref) => {
+    if (ref !== null) {
+      ref.current.scrollTo({
+        top: ref.current.scrollHeight,
+        behavior: 'smooth'
+      })
+    }
   }
 
 
