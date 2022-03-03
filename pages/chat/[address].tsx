@@ -65,7 +65,7 @@ export default function SSRPage({ data }) {
   useEffect(() => {
     if (reqStatus === RequestStatus.success) {
       // You know that the user is loaded: either logged in or out!
-      console.log(userMetamask);
+      //  console.log(userMetamask);
     }
     // You also have your firebase app initialized
   }, [reqStatus, userMetamask]);

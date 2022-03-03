@@ -4,12 +4,12 @@ import { get, getDatabase, push, ref, set } from "firebase/database";
 
 const createNewChat = async (memberAddresses: [string, string], setChatId: Function) => {
     //save to firebase
-    
+
     try {
         const db = getDatabase();
         const chatRef = ref(db, `chats/users/${memberAddresses[0].toLowerCase()}/chatsWith/${memberAddresses[1].toLowerCase()}`)
+        const chatTwoRef = ref(db, `chats/users/${memberAddresses[1].toLowerCase()}/chatsWith/${memberAddresses[0].toLowerCase()}`)
         const userChat = await get(chatRef);
-
         //Objective_: check if user shares a chat with the person
 
 
@@ -45,7 +45,7 @@ const createNewChat = async (memberAddresses: [string, string], setChatId: Funct
 
             //legacy code. Erase when new code is ready
             await set(chatRef, newKey);
-            await set(chatRef, newKey);
+            await set(chatTwoRef, newKey);
             //---------------------
 
             //new code
@@ -53,8 +53,8 @@ const createNewChat = async (memberAddresses: [string, string], setChatId: Funct
             set(ref(db, "chats/chats/" + newKey), { timestamp: -1 });
 
             memberAddresses.forEach((address) => {
-                set(ref(db, "chats/members/" + newKey + "/" + address), true)
-                set(ref(db, "chats/users/" + address + "/" + newKey), true)
+                set(ref(db, "chats/members/" + newKey + "/" + address.toLowerCase()), true)
+                set(ref(db, "chats/users/" + address.toLowerCase() + "/" + newKey), true)
             })
 
 

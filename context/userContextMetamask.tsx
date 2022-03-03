@@ -16,7 +16,7 @@ export default function UserMetamaskContextComp({ children }) {
 
   const makeUserRequest = async () => {
     if (window?.ethereum?.selectedAddress) {
-      //There's an account already connected. No need to request anything
+      //There's an account already logged in. No need to request anything
       setUserMetamask(window.ethereum.selectedAddress)
       setReqStatus(RequestStatus.success)
       return
