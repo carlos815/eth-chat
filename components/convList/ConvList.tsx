@@ -1,7 +1,7 @@
 import { getDatabase, ref, onChildAdded, onValue, off } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useCurrentChat } from "../../context/currentChatContext";
-import ConvItem from "./ConvItem"
+import ConvItem from "./ConvItem";
 
 const ConvList = ({ chatList }) => {
 
