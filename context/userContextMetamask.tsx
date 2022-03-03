@@ -1,6 +1,4 @@
 import { useState, useEffect, createContext, useContext } from 'react'
-import { createFirebaseApp } from '../firebase/clientApp'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { RequestStatus } from '../helpers/types'
 
@@ -15,34 +13,30 @@ export default function UserMetamaskContextComp({ children }) {
   }
 
   const makeUserRequest = async () => {
-    if (window?.ethereum?.selectedAddress) {
-      //There's an account already logged in. No need to request anything
-      setUserMetamask(window.ethereum.selectedAddress)
-      setReqStatus(RequestStatus.success)
-      return
-    }
-
-
-    //REquest a metamask address
     setReqStatus(RequestStatus.loading)
+
     const provider = await detectEthereumProvider();
 
+    //Check if metamask is installed 🤔
     if (provider === window.ethereum) {
-      //'MetaMask is installed
-      console.log("metamask installed")
+      //MetaMask installed 👍
       try {
-        //No account logged in. Requesting
+        //No account logged in. Requesting 
         const request: ["string"] = await window.ethereum.request({ method: 'eth_requestAccounts' });
         setUserMetamask(request[0])
         setReqStatus(RequestStatus.success)
       } catch (e) {
-        //request error
-        setReqStatus(RequestStatus.error)
-
-        console.log(e)
+        //request error ⛔
+        if (e.code === -32002) {
+          //There's a request still pending
+          return
+        } else {
+          setReqStatus(RequestStatus.error)
+          console.log(e)
+        }
       }
     } else {
-      //metamask not installed
+      //metamask not installed 👎
       console.log("metamask not found")
       setReqStatus(RequestStatus.error)
     }
@@ -50,7 +44,19 @@ export default function UserMetamaskContextComp({ children }) {
 
 
   useEffect(() => {
-    makeUserRequest()
+
+    if (window?.ethereum?.selectedAddress) {
+      //There's an account already logged in. No need to request anything 🏖
+      setUserMetamask(window.ethereum.selectedAddress)
+      setReqStatus(RequestStatus.success)
+    }
+
+    //Create account change listener 🔍
+    window.ethereum.on('accountsChanged', () => { window.location.reload() });
+    return () => {
+      //Remove account change listener
+      window.ethereum?.removeListener('accountsChanged', () => { window.location.reload() });
+    }
   }, [])
 
   return (
