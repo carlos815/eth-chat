@@ -2,7 +2,8 @@ import { useState, useEffect, createContext, useContext } from 'react'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { RequestStatus } from '../helpers/types'
 
-export const UserMetamaskContext = createContext()
+export const UserMetamaskContext = createContext({})
+
 
 export default function UserMetamaskContextComp({ children }) {
   const [reqStatus, setReqStatus] = useState<RequestStatus>(RequestStatus.idle)
@@ -22,7 +23,7 @@ export default function UserMetamaskContextComp({ children }) {
       //MetaMask installed 👍
       try {
         //No account logged in. Requesting 
-        const request: ["string"] = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const request: ["string"] = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
         setUserMetamask(request[0])
         setReqStatus(RequestStatus.success)
       } catch (e) {
@@ -45,17 +46,17 @@ export default function UserMetamaskContextComp({ children }) {
 
   useEffect(() => {
 
-    if (window?.ethereum?.selectedAddress) {
+    if ((window as any)?.ethereum?.selectedAddress) {
       //There's an account already logged in. No need to request anything 🏖
-      setUserMetamask(window.ethereum.selectedAddress)
+      setUserMetamask((window as any).ethereum.selectedAddress)
       setReqStatus(RequestStatus.success)
     }
 
     //Create account change listener 🔍
-    window.ethereum.on('accountsChanged', () => { window.location.reload() });
+    (window as any).ethereum.on('accountsChanged', () => { window.location.reload() });
     return () => {
       //Remove account change listener
-      window.ethereum?.removeListener('accountsChanged', () => { window.location.reload() });
+      (window as any).ethereum?.removeListener('accountsChanged', () => { window.location.reload() });
     }
   }, [])
 

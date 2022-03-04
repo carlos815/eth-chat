@@ -2,7 +2,7 @@ import { useState, useEffect, createContext, useContext } from 'react'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { RequestStatus } from '../helpers/types'
 
-export const CurrentChatContext = createContext()
+export const CurrentChatContext = createContext({})
 
 export default function CurrentChatContextComp({ children }) {
 
