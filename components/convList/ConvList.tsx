@@ -5,7 +5,7 @@ import ConvItem from "./ConvItem";
 
 const ConvList = ({ chatList }) => {
 
-    const [recentChatsData, setRecentsChatData] = useState({})
+    const [recentChatsData, setRecentsChatData] = useState<{}>({})
 
     useEffect(() => {
         const db = getDatabase();
@@ -30,11 +30,25 @@ const ConvList = ({ chatList }) => {
         })
     }, [chatList])
 
+    function sortedArrayRecentChatsData() {
+        const _array = []
+        Object.keys(recentChatsData).forEach((key) => {
+            if (recentChatsData[key].timestamp === -1) return //Filter empty chats
+            _array.push({ ...recentChatsData[key], id: key })
+        })
+
+        _array.sort((a, b) => {
+
+            return b.timestamp - a.timestamp
+        });
+
+        return _array
+    }
+
     return (
         <div className="flex flex-col  gap-y-2">
-            {Object.keys(recentChatsData).map((key) => {
-                if (recentChatsData[key].timestamp === -1) return
-                return <ConvItem key={key} data={recentChatsData[key]} />
+            {sortedArrayRecentChatsData().map((chatData) => {
+                return <ConvItem key={chatData.key} data={chatData} />
             })}
 
         </div>
