@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useCurrentChat } from "../../context/currentChatContext"
 import { useUserMetamask } from "../../context/userContextMetamask"
 import sendMessage from "../../firebase/sendMessage"
+import { eraseWritingState, setIsWritingState } from "../../firebase/writingState"
 import nowEpoch from "../../helpers/nowEpoch"
 import { Message } from "../../helpers/types"
 import SendMessageButton from "./SendMessageButton"
@@ -23,6 +24,8 @@ const MessageInput = ({ onChange, onSendCallback, onErrorCallback }) => {
         }
 
         setMessage("")
+        eraseWritingState(userMetamask)
+
         sendMessage(chatId, _message,
             () => {
                 if (onSendCallback) onSendCallback()
@@ -32,10 +35,24 @@ const MessageInput = ({ onChange, onSendCallback, onErrorCallback }) => {
             }
     }
 
+    const handleInputChange = (e) => {
+        const formContent = e.target.value;
+        if (message === "") {
+            //set to writing
+            setIsWritingState(userMetamask, chatId)
+        }
+
+        if (formContent === "") {
+            //set to not writing
+            eraseWritingState(userMetamask)
+        }
+
+        setMessage(e.target.value)
+    }
 
     return <form className="my-4 flex gap-x-5 full" >
 
-        <input className="border-slate-300 bg-slate-100 p-2" onChange={(e) => setMessage(e.target.value)} value={message} disabled={!userMetamask} />
+        <input className="border-slate-300 bg-slate-100 p-2" onChange={handleInputChange} value={message} disabled={!userMetamask} />
         <SendMessageButton disabled={message === ""} onClick={handleSendMessage} />
 
     </form>

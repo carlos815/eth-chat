@@ -24,7 +24,6 @@ const ConvList = ({ chatList }) => {
                         message, timestamp, name: key
                     }
                 }
-                //  console.log(_chatData)
                 setRecentsChatData({ ...recentChatsData, ..._chatData })
             })
         })

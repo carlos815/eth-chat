@@ -1,5 +1,6 @@
 import { useCurrentChat } from "../../context/currentChatContext"
 import { useUserMetamask } from "../../context/userContextMetamask"
+import { eraseWritingState } from "../../firebase/writingState"
 
 const ConvItem = ({ data }) => {
     const { name, message, timestamp, id } = data
@@ -7,11 +8,14 @@ const ConvItem = ({ data }) => {
     const { userMetamask }: any = useUserMetamask()
 
     const handleClick = () => {
-        //    console.log(id)
         setCurrentChat(name)
         setChatId(id)
+        eraseWritingState(userMetamask)
     }
 
+    const chatIsOpen = () => {
+
+    }
     const isActive = currentChat?.toLowerCase() === name.toLowerCase()
 
     const time = new Date(timestamp)

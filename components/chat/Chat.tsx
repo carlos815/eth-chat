@@ -16,6 +16,7 @@ import { useCurrentChat } from "../../context/currentChatContext";
 export default function Chat() {
     const [message, setMessage] = useState<string>("")
     const [allMessages, setAllMessages] = useState<{ [key: string]: Message }>()
+    const [isWriting, setIsWriting] = useState<boolean>(true)
     const { currentChat, setCurrentChat, chatId, setChatId }: any = useCurrentChat()
 
     const { reqStatus, userMetamask }: any = useUserMetamask()
@@ -49,10 +50,23 @@ export default function Chat() {
                 //create database listener to update chatbox automatically on change
                 let newData = {}
                 await onChildAdded(messageRef, (snapshot) => {
-                    console.log("onChildAdded", snapshot.val().message)
                     newData = { ...newData, [snapshot.key]: snapshot.val() }
                     setAllMessages({ ...newData });
                     scrollTotheEnd(chatbox)
+                })
+
+
+                //Check if user is writing
+
+                const isWritingRef = ref(db, `chats/isWriting/${currentChat.toLowerCase()}/${chatId}`)
+                off(isWritingRef)
+                onValue(isWritingRef, (snapshot) => {
+                    if (snapshot.val() == null) {
+                        setIsWriting(false)
+                    }
+                    else {
+                        setIsWriting(true)
+                    }
                 })
 
                 setLoading(false)
@@ -78,6 +92,7 @@ export default function Chat() {
     return (
         <div className="h-full grow flex flex-col ">
             <h1>{currentChat}</h1>
+            {isWriting && <h2>User is writing...</h2>}
             {!loading ? <><Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
                 <MessageInput message={message} disabled={!userMetamask} onSendCallback={
                     () => {

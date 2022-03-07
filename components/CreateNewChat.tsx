@@ -20,6 +20,8 @@ const CreateNewChat = ({ }) => {
             console.log("BUTTON PRESS TRIGGERED")
             createNewChat([userMetamask, address], setChatId)
             setCurrentChat(address)
+
+            
         } else {
             setIsAddress(false)
         }
