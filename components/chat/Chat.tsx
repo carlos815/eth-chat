@@ -52,7 +52,7 @@ export default function Chat() {
         setLoading(true);
 
         (async () => {
-            createNewChat([userMetamask, currentChat], setChatId)
+            //   createNewChat([userMetamask, currentChat], setChatId)
             if (isFirebaseReady && chatId !== "") {
                 const db = getDatabase();
                 const messageRef = ref(db, "chats/messages/" + chatId.toString());

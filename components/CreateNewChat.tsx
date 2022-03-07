@@ -17,6 +17,7 @@ const CreateNewChat = ({ }) => {
         event.preventDefault()
         if (Web3.utils.isAddress(address)) {
             setIsAddress(true)
+            console.log("BUTTON PRESS TRIGGERED")
             createNewChat([userMetamask, address], setChatId)
             setCurrentChat(address)
         } else {

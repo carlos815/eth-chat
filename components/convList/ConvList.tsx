@@ -16,7 +16,6 @@ const ConvList = ({ chatList }) => {
             const messageRef = ref(db, "chats/chats/" + chatList[key]);
             off(messageRef)
             onValue(messageRef, (snapshot) => {
-
                 if (snapshot.val() == null) return
                 const { message, timestamp } = snapshot.val()
 
@@ -25,6 +24,7 @@ const ConvList = ({ chatList }) => {
                         message, timestamp, name: key
                     }
                 }
+                //  console.log(_chatData)
                 setRecentsChatData({ ...recentChatsData, ..._chatData })
             })
         })
@@ -48,7 +48,7 @@ const ConvList = ({ chatList }) => {
     return (
         <div className="flex flex-col  gap-y-2">
             {sortedArrayRecentChatsData().map((chatData) => {
-                return <ConvItem key={chatData.key} data={chatData} />
+                return <ConvItem key={chatData.id} data={chatData} />
             })}
 
         </div>

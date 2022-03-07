@@ -4,7 +4,7 @@ import { get, getDatabase, push, ref, set } from "firebase/database";
 
 const createNewChat = async (memberAddresses: [string, string], setChatId: Function) => {
     //save to firebase
-
+    if (memberAddresses[0] === undefined || memberAddresses[1] === undefined) return
     try {
         const db = getDatabase();
         const chatRef = ref(db, `chats/users/${memberAddresses[0].toLowerCase()}/chatsWith/${memberAddresses[1].toLowerCase()}`)
@@ -34,10 +34,12 @@ const createNewChat = async (memberAddresses: [string, string], setChatId: Funct
          let listOfChats: [string];
          console.log(Object.keys(userChats.val()))*/
         if (userChat === undefined) { throw Error("error") }
-        if (userChat.exists()) {
+        if (userChat.exists() && (await get(chatTwoRef)).exists()) {
             setChatId(userChat.toJSON().toString())
+            console.log("EXISTS")
             //dont create a new one
         } else {
+            console.log("CREEATING NEW CHAT")
             //--Create a new chat--
             // Get a unique key
             const newKey = push(ref(db, "chats/chats")).key
