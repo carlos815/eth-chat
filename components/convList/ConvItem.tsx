@@ -9,7 +9,7 @@ const ConvItem = ({ data }) => {
         setCurrentChat(name)
     }
 
-    const isActive = currentChat === name
+    const isActive = currentChat?.toLowerCase() === name.toLowerCase()
 
     const time = new Date(timestamp)
     return <button

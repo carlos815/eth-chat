@@ -33,7 +33,7 @@ const ConvList = ({ chatList }) => {
     function sortedArrayRecentChatsData() {
         const _array = []
         Object.keys(recentChatsData).forEach((key) => {
-            // if (recentChatsData[key].timestamp === -1) return //Filter empty chats
+            if (recentChatsData[key].timestamp === -1) return //Filter empty chats
             _array.push({ ...recentChatsData[key], id: key })
         })
 

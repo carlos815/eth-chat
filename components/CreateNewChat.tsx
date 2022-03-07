@@ -18,6 +18,7 @@ const CreateNewChat = ({ }) => {
         if (Web3.utils.isAddress(address)) {
             setIsAddress(true)
             createNewChat([userMetamask, address], setChatId)
+            setCurrentChat(address)
         } else {
             setIsAddress(false)
         }
