@@ -1,12 +1,15 @@
 import { useCurrentChat } from "../../context/currentChatContext"
+import { useUserMetamask } from "../../context/userContextMetamask"
 
 const ConvItem = ({ data }) => {
-    const { name, message, timestamp } = data
-    const { currentChat, setCurrentChat }: any = useCurrentChat()
+    const { name, message, timestamp, id } = data
+    const { currentChat, setCurrentChat, setChatId }: any = useCurrentChat()
+    const { userMetamask }: any = useUserMetamask()
 
     const handleClick = () => {
-
+        //    console.log(id)
         setCurrentChat(name)
+        setChatId(id)
     }
 
     const isActive = currentChat?.toLowerCase() === name.toLowerCase()

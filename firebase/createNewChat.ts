@@ -36,10 +36,8 @@ const createNewChat = async (memberAddresses: [string, string], setChatId: Funct
         if (userChat === undefined) { throw Error("error") }
         if (userChat.exists() && (await get(chatTwoRef)).exists()) {
             setChatId(userChat.toJSON().toString())
-            console.log("EXISTS")
             //dont create a new one
         } else {
-            console.log("CREEATING NEW CHAT")
             //--Create a new chat--
             // Get a unique key
             const newKey = push(ref(db, "chats/chats")).key

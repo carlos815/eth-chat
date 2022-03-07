@@ -26,33 +26,17 @@ export default function Chat() {
     const chatbox = useRef(null)
 
     const [loading, setLoading] = useState<boolean>(true)
-    const handleSendMessage = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault()
-
-        const _message: Message = {
-            message: message,
-            name: userMetamask,
-            timestamp: nowEpoch()
-        }
-
-        setMessage("")
-        sendMessage(chatId, _message,
-            /*callback*/
-            () => {
-                scrollTotheEnd(chatbox)
-            }),
-            (e) => {
-                /*Error callback*/
-            }
-    }
 
     const [prevChatId, setPrevChatId] = useState("")
 
     useEffect(() => {
-        setLoading(true);
-
+        setAllMessages({});
         (async () => {
-            //   createNewChat([userMetamask, currentChat], setChatId)
+            setLoading(true);
+            //  createNewChat([userMetamask, currentChat], setChatId)
+
+            //  setChatId(chatId)
+            //  setCurrentChat(currentChat)
             if (isFirebaseReady && chatId !== "") {
                 const db = getDatabase();
                 const messageRef = ref(db, "chats/messages/" + chatId.toString());
@@ -65,8 +49,9 @@ export default function Chat() {
                 //create database listener to update chatbox automatically on change
                 let newData = {}
                 await onChildAdded(messageRef, (snapshot) => {
+                    console.log("onChildAdded", snapshot.val().message)
                     newData = { ...newData, [snapshot.key]: snapshot.val() }
-                    setAllMessages({ ...allMessages, ...newData });
+                    setAllMessages({ ...newData });
                     scrollTotheEnd(chatbox)
                 })
 
@@ -94,7 +79,11 @@ export default function Chat() {
         <div className="h-full grow flex flex-col ">
             <h1>{currentChat}</h1>
             {!loading ? <><Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
-                <MessageInput message={message} disabled={!userMetamask} onChange={(e) => setMessage(e.target.value)} onClick={handleSendMessage} /> </> : "loading"}
+                <MessageInput message={message} disabled={!userMetamask} onSendCallback={
+                    () => {
+                        scrollTotheEnd(chatbox)
+                    }
+                } /> </> : "loading"}
         </div>
     );
 }
