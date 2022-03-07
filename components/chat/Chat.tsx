@@ -92,6 +92,7 @@ export default function Chat() {
 
     return (
         <div className="h-full grow flex flex-col ">
+            <h1>{currentChat}</h1>
             {!loading ? <><Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
                 <MessageInput message={message} disabled={!userMetamask} onChange={(e) => setMessage(e.target.value)} onClick={handleSendMessage} /> </> : "loading"}
         </div>
