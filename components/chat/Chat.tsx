@@ -94,7 +94,7 @@ export default function Chat() {
             <h1>{currentChat}</h1>
             {isWriting && <h2>User is writing...</h2>}
             {!loading ? <><Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
-                <MessageInput message={message} disabled={!userMetamask} onSendCallback={
+                <MessageInput onSendCallback={
                     () => {
                         scrollTotheEnd(chatbox)
                     }

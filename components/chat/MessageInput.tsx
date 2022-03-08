@@ -7,7 +7,12 @@ import nowEpoch from "../../helpers/nowEpoch"
 import { Message } from "../../helpers/types"
 import SendMessageButton from "./SendMessageButton"
 
-const MessageInput = ({ onChange, onSendCallback, onErrorCallback }) => {
+interface MessageInputProps {
+    onSendCallback?: Function,
+    onErrorCallback?: Function
+}
+
+const MessageInput = ({ onSendCallback, onErrorCallback }: MessageInputProps) => {
     const { reqStatus, userMetamask }: any = useUserMetamask()
     const [message, setMessage] = useState<string>("")
     const { currentChat, setCurrentChat, chatId, setChatId }: any = useCurrentChat()
