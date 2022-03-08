@@ -1,11 +1,16 @@
-import { getDatabase, ref, onChildAdded, onValue, off } from "firebase/database";
+import { getDatabase, ref, onChildAdded, onValue, off, DataSnapshot } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useCurrentChat } from "../../context/currentChatContext";
+import { useUserMetamask } from "../../context/userContextMetamask";
+import { onValueUnread } from "../../firebase/setUnreadMessage";
 import ConvItem from "./ConvItem";
 
 const ConvList = ({ chatList }) => {
 
     const [recentChatsData, setRecentsChatData] = useState<{}>({})
+    const [unreadChats, setUnreadChats] = useState<{}>({})
+    const { userMetamask }: any = useUserMetamask()
+
 
     useEffect(() => {
         const db = getDatabase();
@@ -21,10 +26,25 @@ const ConvList = ({ chatList }) => {
 
                 _chatData = {
                     ..._chatData, [chatList[key]]: {
-                        message, timestamp, name: key
+                        message, timestamp, name: key, unread: false
                     }
                 }
                 setRecentsChatData({ ...recentChatsData, ..._chatData })
+            })
+            let _data = {}
+            onValueUnread(chatList[key], userMetamask, (snapshot: DataSnapshot) => {
+                if (snapshot.exists()) {
+
+                    _data = { ..._data, [chatList[key]]: { ...recentChatsData[chatList[key]], unread: false, } }
+
+                    setUnreadChats({
+                        ...unreadChats, ..._data
+                    })
+
+                    //    const isActive = currentChat?.toLowerCase() === name?.toLowerCase()
+
+
+                }
             })
         })
     }, [chatList])
@@ -33,14 +53,15 @@ const ConvList = ({ chatList }) => {
         const _array = []
         Object.keys(recentChatsData).forEach((key) => {
             if (recentChatsData[key].timestamp === -1) return //Filter empty chats
-            _array.push({ ...recentChatsData[key], id: key })
+            //construct the array
+            //  console.log(unreadChats[key])
+            _array.push({ ...recentChatsData[key], id: key, unread: unreadChats[key] !== undefined })
         })
 
         _array.sort((a, b) => {
-
             return b.timestamp - a.timestamp
         });
-        //  console.log(_array)
+        console.log(_array)
         return _array
     }
 

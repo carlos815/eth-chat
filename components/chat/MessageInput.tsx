@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useCurrentChat } from "../../context/currentChatContext"
 import { useUserMetamask } from "../../context/userContextMetamask"
 import sendMessage from "../../firebase/sendMessage"
+import { setUnread } from "../../firebase/setUnreadMessage"
 import { eraseWritingState, setIsWritingState } from "../../firebase/writingState"
 import nowEpoch from "../../helpers/nowEpoch"
 import { Message } from "../../helpers/types"
@@ -30,7 +31,7 @@ const MessageInput = ({ onSendCallback, onErrorCallback }: MessageInputProps) =>
 
         setMessage("")
         eraseWritingState(userMetamask)
-
+        setUnread(chatId, currentChat)
         sendMessage(chatId, _message,
             () => {
                 if (onSendCallback) onSendCallback()
