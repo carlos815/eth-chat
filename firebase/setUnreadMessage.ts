@@ -1,6 +1,6 @@
 import { DataSnapshot, getDatabase, off, onValue, ref, set } from "firebase/database";
 
-export const setUnread = async (chatId: string, userId: string) => {
+export const setUnreadFirebase = async (chatId: string, userId: string) => {
     const db = getDatabase();
     const unreadMessageRef = ref(db, "chats/unread/" + chatId + "/" + userId);
     try {
@@ -11,7 +11,7 @@ export const setUnread = async (chatId: string, userId: string) => {
     }
 }
 
-export const setRead = async (chatId: string, userId: string) => {
+export const setReadFirebase = async (chatId: string, userId: string) => {
     const db = getDatabase();
     const unreadMessageRef = ref(db, "chats/unread/" + chatId + "/" + userId);
     try {

@@ -37,7 +37,7 @@ const Chatbox = ({ allMessages, ownUserName, scrollRef }) => {
                 finalListOfItems.push(<DateSeparator date={dateOfCurrentMessage} key={dateOfCurrentMessage.toISOString()}></DateSeparator>)
             }
 
-            finalListOfItems.push(<MessageBubble name={messageObject.name} message={messageObject.message} isOwnMessage={messageObject.name == ownUserName} key={messageObject.id} lastOfGroup={isLastOfGroup} firstOfGroup={isFirstOfGroup} />)
+            finalListOfItems.push(<MessageBubble name={messageObject.name} message={messageObject.message} isOwnMessage={messageObject.name == ownUserName} key={messageObject.id} lastOfGroup={isLastOfGroup} firstOfGroup={isFirstOfGroup} timestamp={messageObject.timestamp} />)
 
         })
 

@@ -3,7 +3,7 @@ interface DateSeparatorProps {
 }
 
 const DateSeparator = ({ date }: DateSeparatorProps) => {
-    return <div>{date.toDateString()}</div>
+    return <div className="text-center">{date.toDateString()}</div>
 }
 
 export default DateSeparator;
