@@ -13,6 +13,7 @@ import { useCurrentChat } from "../context/currentChatContext";
 
 import NewChatModal from "../components/modals/NewChatModal";
 import Image from "next/image";
+import LoginModal from "../components/modals/LoginModal";
 
 
 const Home: NextPage = () => {
@@ -75,9 +76,9 @@ const Home: NextPage = () => {
         <title>Eth chat</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      {!userMetamask && <LoginModal />}
       {newChatModalOpen && <NewChatModal />}
-      <main className={` divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] overflow-hidden   ${newChatModalOpen && "blur-sm brightness-110"}`} ref={mainRef}>
+      <main className={` divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] overflow-hidden   ${newChatModalOpen || !userMetamask && "blur-sm brightness-110"}`} ref={mainRef}>
         <nav className={`title p-4 text-3xl font-bold  min-h-nav bg-neutral-700 `}>
           ETH CHAT
         </nav>
@@ -96,7 +97,7 @@ const Home: NextPage = () => {
           <button className="fixed flex items-center justify-center bottom-0 m-8 h-16 w-16 bg-primary-600 rounded-full" onClick={() => setNewChatModalOpen(!newChatModalOpen)}><Image src={"/add.svg"} width="24" height={19}></Image></button>
 
         </> :
-          <Login />
+          <></>
         }
       </main >
     </div >
