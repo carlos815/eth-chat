@@ -29,7 +29,6 @@ const ConvItem = ({ data }) => {
         onValueUnread(id, userMetamask, (snapshot: DataSnapshot) => {
 
             if (isActive) {
-                console.log("this ran")
                 setUnread(false)
                 setReadFirebase(id, userMetamask)
                 return
@@ -45,10 +44,10 @@ const ConvItem = ({ data }) => {
     const time = new Date(timestamp)
     return <button
         onClick={handleClick}
-        className={` ${isActive ? "bg-slate-300" : "bg-slate-50"} ${unread === true && "border-4 border-green-500"}`}>
-        <p className="font-bold" >{name}</p>
-        <p className="">{message.length > 10 ? `${message.slice(0, 28)}...` : message}</p>
-        <p className="text-[10px]">{time.toDateString()}</p>
+        className={`flex ${isActive ? "bg-neutral-600" : "bg-slate-50"} ${unread && "after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-negative-500 "}`}>
+        <div>     <p className="font-bold" >{name}</p>
+            <p className="">{message.length > 10 ? `${message.slice(0, 28)}...` : message}</p>
+            <p className="text-[10px]">{time.toDateString()}</p></div>
     </button>
 }
 

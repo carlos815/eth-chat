@@ -58,7 +58,7 @@ const MessageInput = ({ onSendCallback, onErrorCallback }: MessageInputProps) =>
 
     return <form className="my-4 flex gap-x-5 full" >
 
-        <input className="border-slate-300 bg-slate-100 p-2" onChange={handleInputChange} value={message} disabled={!userMetamask} />
+        <input className="border-slate-300 bg-neutral-600 p-2" onChange={handleInputChange} value={message} disabled={!userMetamask} />
         <SendMessageButton disabled={message === ""} onClick={handleSendMessage} />
 
     </form>
