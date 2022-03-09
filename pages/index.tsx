@@ -59,12 +59,16 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (newChatModalOpen) {
-      mainRef.current.addEventListener("click", () => {
+      mainRef.current.addEventListener("click", (event) => {
         setNewChatModalOpen(false)
-      })
+        event.stopPropagation();
+        event.preventDefault();
+      }, { once: true })
     } else {
-      mainRef.current.removeEventListener("click", () => {
+      mainRef.current.removeEventListener("click", (event) => {
         setNewChatModalOpen(false)
+        event.stopPropagation();
+        event.preventDefault();
       })
     }
   }, [newChatModalOpen])
