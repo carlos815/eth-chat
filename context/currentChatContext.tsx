@@ -10,6 +10,7 @@ export default function CurrentChatContextComp({ children }) {
 
   const [currentChat, setCurrentChat] = useState<string>()
   const [chatId, setChatId] = useState<string>("")
+  const [newChatModalOpen, setNewChatModalOpen] = useState<boolean>(false)
 
   useEffect(() => {
 
@@ -17,7 +18,7 @@ export default function CurrentChatContextComp({ children }) {
   }, [])
 
   return (
-    <CurrentChatContext.Provider value={{ currentChat, setCurrentChat, chatId, setChatId }}>
+    <CurrentChatContext.Provider value={{ currentChat, setCurrentChat, chatId, setChatId, newChatModalOpen, setNewChatModalOpen }}>
       {children}
     </CurrentChatContext.Provider>
   )

@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import type { NextPage } from "next";
 import Chat from "../components/chat/Chat";
@@ -10,8 +10,9 @@ import { getApps } from "firebase/app";
 import { getDatabase, onChildAdded, ref } from "firebase/database";
 import ConvList from "../components/convList/ConvList";
 import { useCurrentChat } from "../context/currentChatContext";
-import CreateNewChat from "../components/CreateNewChat";
-import { headerHeight } from "../helpers/styleConstants";
+
+import NewChatModal from "../components/modals/NewChatModal";
+import Image from "next/image";
 
 
 const Home: NextPage = () => {
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
   const { reqStatus, userMetamask, requestUser }: any = useUserMetamask()
 
 
-  const { currentChat, setCurrentChat }: any = useCurrentChat()
+  const { currentChat, setCurrentChat, newChatModalOpen, setNewChatModalOpen }: any = useCurrentChat()
 
   const [recentChats, setRecentChats] = useState<string[]>([])
 
@@ -54,6 +55,20 @@ const Home: NextPage = () => {
     }, [currentChat]);
   */
 
+
+  useEffect(() => {
+    if (newChatModalOpen) {
+      mainRef.current.addEventListener("click", () => {
+        setNewChatModalOpen(false)
+      })
+    } else {
+      mainRef.current.removeEventListener("click", () => {
+        setNewChatModalOpen(false)
+      })
+    }
+  }, [newChatModalOpen])
+
+  const mainRef = useRef(null)
   return (
     <div className="container">
       <Head>
@@ -61,7 +76,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className=" divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] overflow-hidden">
+      {newChatModalOpen && <NewChatModal />}
+      <main className={` divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] overflow-hidden   ${newChatModalOpen && "blur-sm brightness-110"}`} ref={mainRef}>
         <nav className={`title p-4 text-3xl font-bold  min-h-nav bg-neutral-700 `}>
           ETH CHAT
         </nav>
@@ -77,12 +93,13 @@ const Home: NextPage = () => {
 
           </div>
 
-          <CreateNewChat />
+          <button className="fixed flex items-center justify-center bottom-0 m-8 h-16 w-16 bg-primary-600 rounded-full" onClick={() => setNewChatModalOpen(!newChatModalOpen)}><Image src={"/add.svg"} width="24" height={19}></Image></button>
+
         </> :
           <Login />
         }
       </main >
-    </div>
+    </div >
   );
 }
 

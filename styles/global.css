@@ -41,4 +41,8 @@ body {
   .scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-neutral-500;
   }
+
+  .btn {
+    @apply hover:cursor-pointer hover:scale-105 transition-all bg-primary-600 rounded-lg px-4 py-2 font-bold  disabled:bg-neutral-500;
+  }
 }
