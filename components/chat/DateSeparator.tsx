@@ -17,11 +17,12 @@ const DateSeparator = ({ date }: DateSeparatorProps) => {
         }
     }
 
-    return <div className="text-center flex items-center gap-x-10
+    return <div className="text-center flex items-center gap-x-10 
     before:h-[0.5px] before:w-full before:bg-neutral-600
         after:h-[0.5px] after:w-full after:bg-neutral-600
 
-    ">{actualDate()}</div>
+    "><p className="w-36">
+            {actualDate()}</p></div>
 }
 
 export default DateSeparator;

@@ -45,7 +45,7 @@ const Chatbox = ({ allMessages, ownUserName, scrollRef }) => {
     }
 
 
-    return <div className="p-3 rounded bg-slate-100 my-4 flex flex-col grow  overflow-y-auto scroll-m-2.5 scroll-p-64 scrollbar max-h-[500px] min-h-[500px] gap-y-1" ref={scrollRef}>
+    return <div className="p-3 rounded bg-slate-100 my-4 flex flex-col grow  overflow-y-auto scroll-m-2.5 scroll-p-64 scrollbar  gap-y-1" ref={scrollRef}>
         {renderedListOfItems()}
     </div>
 }

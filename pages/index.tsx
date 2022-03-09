@@ -11,6 +11,7 @@ import { getDatabase, onChildAdded, ref } from "firebase/database";
 import ConvList from "../components/convList/ConvList";
 import { useCurrentChat } from "../context/currentChatContext";
 import CreateNewChat from "../components/CreateNewChat";
+import { headerHeight } from "../helpers/styleConstants";
 
 
 const Home: NextPage = () => {
@@ -52,6 +53,7 @@ const Home: NextPage = () => {
       console.log("data changed")
     }, [currentChat]);
   */
+
   return (
     <div className="container">
       <Head>
@@ -59,13 +61,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="p-4    min-h-screen max-h-screen flex flex-col ">
-        <h1 className="title text-3xl font-bold underline">
+      <main className="  min-h-screen max-h-screen flex flex-col min-w-[100vw] ">
+        <nav className={`title text-3xl font-bold underline min-h-nav bg-neutral-600 `}>
           ETH CHAT
-        </h1>
+        </nav>
         {userMetamask ? <>
 
-          <div className="flex">
+          <div className="flex min-h-nav">
 
 
             <ConvList chatList={recentChats} />

@@ -90,7 +90,7 @@ export default function Chat() {
     }, [reqStatus, userMetamask]);
 
     return (
-        <div className="h-full grow flex flex-col ">
+        <div className="h-full grow flex flex-col max-h-content[calc(100vh-61px)] min-h-content[calc(100vh-61px)] max-h-[calc(100vh-61px)]">
             <h1>{currentChat}</h1>
             {isWriting && <h2>User is writing...</h2>}
             {!loading ? <><Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />

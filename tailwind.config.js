@@ -1,4 +1,6 @@
 module.exports = {
+  mode: "jit",
+
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -8,6 +10,7 @@ module.exports = {
       display: ["Urbanist", "Helvetica", "Arial", "sans-serif"],
       body: ["IBM Plex Sans", "sans-serif"],
     },
+
     colors: {
       transparent: "transparent",
       current: "currentColor",
@@ -36,6 +39,19 @@ module.exports = {
         500: "#FF3D3D",
       },
     },
+    extend: {
+      spacing: {
+        nav: "61px",
+        content: "calc(100vh-61px)",
+      },
+      minHeight: {
+        nav: "61px",
+        content: "calc(100vh-61px)",
+      },
+      maxHeight: {
+        nav: "61px",
+        content: "calc(100vh-61px)",
+      },
+    },
   },
-  extend: {},
 };
