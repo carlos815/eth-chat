@@ -61,13 +61,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className=" divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] ">
+      <main className=" divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] overflow-hidden">
         <nav className={`title p-4 text-3xl font-bold  min-h-nav bg-neutral-700 `}>
           ETH CHAT
         </nav>
         {userMetamask ? <>
 
-          <div className="flex min-h-nav divide-x divide-neutral-600 ">
+          <div className="flex  divide-x divide-neutral-600 ">
 
 
             <ConvList chatList={recentChats} />

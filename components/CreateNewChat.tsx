@@ -36,13 +36,13 @@ const CreateNewChat = ({ }) => {
 
 
     return (
-        <form className="my-4 flex gap-x-5 w-8" >
+        <form className="m-8  flex gap-x-5 w-12 fixed z-20 bottom-0 left-0" >
             <div className="flex flex-col">
                 <input className="bg-neutral-500 p-2" value={address} onChange={onChange} />
 
                 {!isAddress && <span className="text-red-600">NOot a valid address</span>}
             </div>
-            <button className="border-white border-2 font-bold rounded-lg" onClick={handleClick}>Create New Chad</button>
+            <button className=" border-white border-2 font-bold rounded-lg" onClick={handleClick}>Create New Chad</button>
         </form>
     )
 }
