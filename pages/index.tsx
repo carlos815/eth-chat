@@ -78,7 +78,7 @@ const Home: NextPage = () => {
       </Head>
       {!userMetamask && <LoginModal />}
       {newChatModalOpen && <NewChatModal />}
-      <main className={` divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] overflow-hidden   ${newChatModalOpen || !userMetamask && "blur-sm brightness-110"}`} ref={mainRef}>
+      <main className={` divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] overflow-hidden   ${(newChatModalOpen || !userMetamask) && "blur-sm brightness-110"}`} ref={mainRef}>
         <nav className={`title p-4 text-3xl font-bold  min-h-nav bg-neutral-700 `}>
           ETH CHAT
         </nav>
