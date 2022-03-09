@@ -2,7 +2,6 @@ import { getDatabase, ref, onChildAdded, onValue, off, DataSnapshot } from "fire
 import { useEffect, useState } from "react";
 import { useCurrentChat } from "../../context/currentChatContext";
 import { useUserMetamask } from "../../context/userContextMetamask";
-import { onValueUnread, setRead } from "../../firebase/setUnreadMessage";
 import ConvItem from "./ConvItem";
 
 const ConvList = ({ chatList }) => {
@@ -52,7 +51,7 @@ const ConvList = ({ chatList }) => {
     }
 
     return (
-        <div className="flex divide-y divide-neutral-600 gap flex-col  gap-y-2 overflow-x-hidden scrollbar w-80 min-w-min">
+        <div className="flex divide-y divide-neutral-600 gap flex-col  overflow-x-hidden scrollbar w-96  min-w-fit  ">
             {sortedArrayRecentChatsData().map((chatData) => {
                 return <ConvItem key={chatData.id} data={chatData} />
             })}

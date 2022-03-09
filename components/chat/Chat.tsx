@@ -91,7 +91,7 @@ export default function Chat() {
     }, [reqStatus, userMetamask]);
 
     return (
-        <div className="h-full grow flex flex-col min-h-[calc(100vh-61px)] max-h-[calc(100vh-61px)] divide-y divide-neutral-600">
+        <div className="h-full grow flex flex-col min-h-[calc(100vh-62px)] max-h-[calc(100vh-62px)] divide-y divide-neutral-600">
             <ChatHeader address={currentChat} username={"Alias de usuario"} />
 
 

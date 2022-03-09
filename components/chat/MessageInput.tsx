@@ -56,10 +56,10 @@ const MessageInput = ({ onSendCallback, onErrorCallback }: MessageInputProps) =>
         setMessage(e.target.value)
     }
 
-    return <form className="my-4 flex gap-x-5 full" >
+    return <form className="flex flex-col    max-h-content w-full bg-neutral-700 divide-y divide-neutral-600" >
 
-        <input className="border-slate-300 bg-neutral-600 p-2" onChange={handleInputChange} value={message} disabled={!userMetamask} />
-        <SendMessageButton disabled={message === ""} onClick={handleSendMessage} />
+        <input contentEditable="true" className=" bg-neutral-700 py-3 px-6" placeholder="Write a message..." onChange={handleInputChange} value={message} disabled={!userMetamask} />
+        <div className="flex justify-end py-3 px-6">     <SendMessageButton disabled={message === ""} onClick={handleSendMessage} /></div>
 
     </form>
 

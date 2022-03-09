@@ -30,7 +30,7 @@ const ConvItem = ({ data }) => {
 
             if (isActive) {
                 setUnread(false)
-                 setReadFirebase(id, userMetamask)
+                setReadFirebase(id, userMetamask)
                 return
             }
 
@@ -42,12 +42,19 @@ const ConvItem = ({ data }) => {
         })
     }, [isActive])
     const time = new Date(timestamp)
+
+
+
+    const unreadBadge = "after:content-[''] after:w-[9px] after:h-[9px] after:rounded-full after:bg-negative-500 "
+
+
     return <button
         onClick={handleClick}
-        className={`flex   ${isActive ? "bg-neutral-700" : "bg-slate-50"} ${unread && "after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-negative-500 "}`}>
-        <div>     <p className="font-bold" >{name}</p>
-            <p className="">{message.length > 10 ? `${message.slice(0, 28)}...` : message}</p>
-            <p className="text-[10px]">{time.toDateString()}</p></div>
+        className={`flex gap-x-5 items-center justify-between p-6 gap-y-12 max-w-full w-full  text-left   ${isActive ? "bg-neutral-700" : "bg-slate-50"} ${unread && unreadBadge}`}>
+        <div className="flex flex-col gap-y-2 ">
+            <p className="font-bold font-display text-[14px]" >{`${name.slice(0, 25)}(...)`}</p>
+            <p className="">{message.length > 10 ? `${message.slice(0, 25)}...` : message}</p>
+            <p className="text-xs">{time.toTimeString().slice(0, 5)}</p></div>
     </button>
 }
 

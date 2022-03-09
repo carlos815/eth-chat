@@ -1,8 +1,11 @@
+import Image from "next/image";
+
+
 const SendMessageButton = ({ onClick, disabled }) => {
     return <button
-        className="rounded bg-slate-200 border-2 border-slate-300 px-3 font-bold text-slate-700 disabled:text-slate-300"
+        className="hover:cursor-pointer hover:scale-105 transition-all bg-primary-600 rounded-lg px-4 py-2 font-bold text-slate-700 disabled:text-slate-300 "
         onClick={onClick} disabled={disabled}>
-        Send Message
+        <span>Send</span> <Image src={"/send.svg"} width="16" height={16}></Image>
     </button>
 }
 

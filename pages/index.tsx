@@ -62,7 +62,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className=" divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] ">
-        <nav className={`title text-3xl font-bold underline min-h-nav bg-neutral-600 `}>
+        <nav className={`title p-4 text-3xl font-bold  min-h-nav bg-neutral-700 `}>
           ETH CHAT
         </nav>
         {userMetamask ? <>
