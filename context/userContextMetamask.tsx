@@ -23,7 +23,11 @@ export default function UserMetamaskContextComp({ children }) {
       //MetaMask installed 👍
       try {
         //No account logged in. Requesting 
+        console.log("requesting user")
         const request: ["string"] = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
+
+        console.log("setting user:", request[0])
+
         setUserMetamask(request[0])
         setReqStatus(RequestStatus.success)
       } catch (e) {

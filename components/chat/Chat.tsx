@@ -13,11 +13,12 @@ import MessageInput from "../../components/chat/MessageInput";
 import Login from "../../components/Login";
 import { useCurrentChat } from "../../context/currentChatContext";
 import ChatHeader from "./ChatboxHeader";
+import UserWriting from "./UserWriting";
 
 export default function Chat() {
     const [message, setMessage] = useState<string>("")
     const [allMessages, setAllMessages] = useState<{ [key: string]: Message }>()
-    const [isWriting, setIsWriting] = useState<boolean>(true)
+    const [isWriting, setIsWriting] = useState<boolean>(false)
     const { currentChat, setCurrentChat, chatId, setChatId }: any = useCurrentChat()
 
     const { reqStatus, userMetamask }: any = useUserMetamask()
@@ -91,18 +92,18 @@ export default function Chat() {
     }, [reqStatus, userMetamask]);
 
     return (
-        <div className="h-full grow flex flex-col min-h-[calc(100vh-62px)] max-h-[calc(100vh-62px)] divide-y divide-neutral-600 pl-96">
+        <div className="h-full grow flex flex-col w-full min-h-[calc(100vh-62px)] max-h-[calc(100vh-62px)]   pl-96">
             <ChatHeader address={currentChat} username={"Alias de usuario"} />
 
 
-            {isWriting && <h2>User is writing...</h2>}
             {
                 !loading ? <><Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
+                    {isWriting && <UserWriting name={currentChat} />}
                     <MessageInput onSendCallback={
                         () => {
                             scrollTotheEnd(chatbox)
                         }
-                    } /> </> : "loading"
+                    } /> </> : ""
             }
         </div >
     );
