@@ -93,11 +93,13 @@ export default function Chat() {
 
     return (
         <div className="h-full grow flex flex-col w-full min-h-[calc(100vh-62px)] max-h-[calc(100vh-62px)]   pl-96">
-            <ChatHeader address={currentChat} username={"Alias de usuario"} />
 
 
             {
-                !loading ? <><Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
+                !loading ? <>
+                    <ChatHeader address={currentChat} username={"Alias de usuario"} />
+
+                    <Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
                     {isWriting && <UserWriting name={currentChat} />}
                     <MessageInput onSendCallback={
                         () => {
