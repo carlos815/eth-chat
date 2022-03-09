@@ -30,7 +30,7 @@ const ConvItem = ({ data }) => {
 
             if (isActive) {
                 setUnread(false)
-                setReadFirebase(id, userMetamask)
+                 setReadFirebase(id, userMetamask)
                 return
             }
 
@@ -44,7 +44,7 @@ const ConvItem = ({ data }) => {
     const time = new Date(timestamp)
     return <button
         onClick={handleClick}
-        className={`flex ${isActive ? "bg-neutral-600" : "bg-slate-50"} ${unread && "after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-negative-500 "}`}>
+        className={`flex   ${isActive ? "bg-neutral-700" : "bg-slate-50"} ${unread && "after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-negative-500 "}`}>
         <div>     <p className="font-bold" >{name}</p>
             <p className="">{message.length > 10 ? `${message.slice(0, 28)}...` : message}</p>
             <p className="text-[10px]">{time.toDateString()}</p></div>

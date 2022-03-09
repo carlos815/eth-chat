@@ -12,6 +12,7 @@ import Chatbox from "../../components/chat/Chatbox";
 import MessageInput from "../../components/chat/MessageInput";
 import Login from "../../components/Login";
 import { useCurrentChat } from "../../context/currentChatContext";
+import ChatHeader from "./ChatboxHeader";
 
 export default function Chat() {
     const [message, setMessage] = useState<string>("")
@@ -90,15 +91,19 @@ export default function Chat() {
     }, [reqStatus, userMetamask]);
 
     return (
-        <div className="h-full grow flex flex-col max-h-content[calc(100vh-61px)] min-h-content[calc(100vh-61px)] max-h-[calc(100vh-61px)]">
-            <h1>{currentChat}</h1>
+        <div className="h-full grow flex flex-col min-h-[calc(100vh-61px)] max-h-[calc(100vh-61px)] divide-y divide-neutral-600">
+            <ChatHeader address={currentChat} username={"Alias de usuario"} />
+
+
             {isWriting && <h2>User is writing...</h2>}
-            {!loading ? <><Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
-                <MessageInput onSendCallback={
-                    () => {
-                        scrollTotheEnd(chatbox)
-                    }
-                } /> </> : "loading"}
-        </div>
+            {
+                !loading ? <><Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
+                    <MessageInput onSendCallback={
+                        () => {
+                            scrollTotheEnd(chatbox)
+                        }
+                    } /> </> : "loading"
+            }
+        </div >
     );
 }

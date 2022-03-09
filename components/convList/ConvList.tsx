@@ -52,7 +52,7 @@ const ConvList = ({ chatList }) => {
     }
 
     return (
-        <div className="flex flex-col  gap-y-2 overflow-x-hidden">
+        <div className="flex divide-y divide-neutral-600 gap flex-col  gap-y-2 overflow-x-hidden scrollbar w-80 min-w-min">
             {sortedArrayRecentChatsData().map((chatData) => {
                 return <ConvItem key={chatData.id} data={chatData} />
             })}
