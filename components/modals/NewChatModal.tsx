@@ -3,7 +3,7 @@ import Web3 from "web3";
 import { useCurrentChat } from "../../context/currentChatContext";
 import { useUserMetamask } from "../../context/userContextMetamask";
 import createNewChat from "../../firebase/createNewChat";
-import BaseModal from "./baseModal";
+import BaseModal from "./BaseModal";
 
 
 const NewChatModal = ({ }) => {
