@@ -5,44 +5,22 @@ import { useUserMetamask } from "../../context/userContextMetamask";
 import createNewChat from "../../firebase/createNewChat";
 import { RequestStatus } from "../../helpers/types";
 import BaseModal from "./BaseModal";
+import Image from "next/image";
 
 
 const LoginModal = ({ }) => {
+    const { reqStatus, requestUser }: any = useUserMetamask()
 
-    const { reqStatus, userMetamask, requestUser }: any = useUserMetamask()
-    const [address, setAddress] = useState<string>("")
-    const { currentChat, setCurrentChat, chatId, setChatId, newChatModalOpen, setNewChatModalOpen }: any = useCurrentChat()
-
-    const [isAddress, setIsAddress] = useState<boolean>(true);
-
-
-    const handleClick = (event) => {
-        event.preventDefault()
-        if (Web3.utils.isAddress(address)) {
-            setIsAddress(true)
-            createNewChat([userMetamask, address], setChatId)
-            setCurrentChat(address)
-            setNewChatModalOpen(false)
-
-
-
-        } else {
-            setIsAddress(false)
-        }
-    }
-
-
-
-    return <BaseModal title="Welcome to ETH CHAT" content="Please login with your Metamask account" important>
+    return <BaseModal className="top-1/2 -translate-y-1/2" title="Welcome to ETH CHAT" content="Did you even wanted to send messages to other Ethereum addresses? Yeah, me neither. But you can do that now with ETH Chat!" important open>
         <>
 
             {reqStatus === RequestStatus.error && <div>Couln't connect ot metamask</div>}
-            {reqStatus === RequestStatus.loading && <div>Requesting Metamask access</div>}
+
             <button
-                className="btn"
+                className="btn flex items-center justify-center"
                 onClick={requestUser}
             >
-                Request Metamask address
+                {reqStatus === RequestStatus.loading ? <Image className="animate-spin" src={"/spinner.svg"} width="24" height={24} /> : "Login with Metamask"}
             </button></>
 
     </BaseModal>

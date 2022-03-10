@@ -63,6 +63,7 @@ const Home: NextPage = () => {
         setNewChatModalOpen(false)
         event.stopPropagation();
         event.preventDefault();
+
       }, { once: true })
     } else {
       mainRef.current.removeEventListener("click", (event) => {
@@ -73,6 +74,27 @@ const Home: NextPage = () => {
     }
   }, [newChatModalOpen])
 
+
+  useEffect(() => {
+    document.addEventListener("click", (event: MouseEvent) => {
+      if (event.target.className.includes("newChatModal")) {
+        event.preventDefault();
+        event.stopPropagation();
+        (document.querySelector(".newChatModal") as any).close()
+      }
+    })
+
+    document.querySelector(".newChatModal").addEventListener('close', function () {
+      setModalOpen(false)
+    });
+
+    document.querySelector(".newChatModal").addEventListener('open', function () {
+    });
+  }, [])
+
+  const [modalOpen, setModalOpen] = useState(false)
+
+
   const mainRef = useRef(null)
   return (
     <div className="container">
@@ -80,9 +102,12 @@ const Home: NextPage = () => {
         <title>Eth chat</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <NewChatModal className="newChatModal" />
       {!userMetamask && <LoginModal />}
-      {newChatModalOpen && <NewChatModal />}
-      <main className={` divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] overflow-hidden   ${(newChatModalOpen || !userMetamask) && "blur-sm brightness-110"}`} ref={mainRef}>
+      {/*     }
+      {newChatModalOpen && <NewChatModal />}*/}
+      <main className={`relative divide-y divide-neutral-600 min-h-screen max-h-screen flex flex-col min-w-[100vw] overflow-hidden   ${(modalOpen || !userMetamask) && "blur-sm brightness-110"}`} ref={mainRef}>
         <nav className={`title p-4 text-3xl font-bold  min-h-nav bg-neutral-700 `}>
           ETH CHAT
         </nav>
@@ -98,7 +123,13 @@ const Home: NextPage = () => {
 
           </div>
 
-          <button className="fixed flex items-center justify-center bottom-0 m-8 h-16 w-16 bg-primary-600 rounded-full" onClick={() => setNewChatModalOpen(!newChatModalOpen)}><Image src={"/add.svg"} width="24" height={19}></Image></button>
+          <button className="fixed flex items-center justify-center bottom-0 m-8 h-16 w-16 bg-primary-600 rounded-full" onClick={() => {
+            document.querySelector(".newChatModal").showModal();
+            setModalOpen(true)
+
+          }}><Image src={"/add.svg"} width="24" height={19}></Image></button>
+
+
 
         </> :
           <></>

@@ -1,53 +1,27 @@
-import { useState } from "react";
-import Web3 from "web3";
-import { useCurrentChat } from "../../context/currentChatContext";
-import { useUserMetamask } from "../../context/userContextMetamask";
-import createNewChat from "../../firebase/createNewChat";
-
 interface ModalProps {
     title?: string,
     content?: string,
     children?: any,
-    important?: boolean
+    important?: boolean,
+    className?: string,
+    open?: boolean
 }
-const BaseModal = ({ title, content, children, important }: ModalProps) => {
+const BaseModal = ({ title, content, children, important, className, open }: ModalProps) => {
 
-    const { reqStatus, userMetamask, requestUser }: any = useUserMetamask()
-    const [address, setAddress] = useState<string>("")
-    const { currentChat, setCurrentChat, chatId, setChatId }: any = useCurrentChat()
-
-    const [isAddress, setIsAddress] = useState<boolean>(true);
+    return <dialog className={`${className}  rounded-[17px] z-20  bg-neutral-900   p-[3px]  ${important && "bg-gradient-to-r from-gradient-start  to-gradient-end"}`} open={open}>
 
 
-    const handleClick = (event) => {
-        event.preventDefault()
-        if (Web3.utils.isAddress(address)) {
-            setIsAddress(true)
-            console.log("BUTTON PRESS TRIGGERED")
-            createNewChat([userMetamask, address], setChatId)
-            setCurrentChat(address)
+
+        <div className={`text-white   rounded-2xl  p-6 bg-neutral-900 flex flex-col gap-4 w-[571px] text-center `}>
 
 
-        } else {
-            setIsAddress(false)
-        }
-    }
+            <h1 className="text-4xl font-display">{title}</h1>
+            <p className="">{content}</p>
 
-    const onChange =
-        (e) => {
-            setAddress(e.target.value)
-            setIsAddress(true)
+            {children}
 
-        }
-    return <div className={`fixed top-1/2  right-1/2 -translate-y-1/2 translate-x-1/2  z-10 rounded-2xl  p-6 bg-neutral-900 flex flex-col gap-8 w-[571px] ${important && "ring-primary-500 ring-2"}`}>
-
-
-        <h1 className="text-4xl font-display">{title}</h1>
-        <p className="">{content}</p>
-
-        {children}
-
-    </div>
+        </div>
+    </dialog >
 }
 
 export default BaseModal

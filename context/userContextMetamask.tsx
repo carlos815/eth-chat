@@ -10,7 +10,7 @@ export default function UserMetamaskContextComp({ children }) {
 
   const [userMetamask, _setUserMetamask] = useState<string>(null)
   const setUserMetamask = (user: string) => {
-    _setUserMetamask(user.toLowerCase())
+    _setUserMetamask(user?.toLowerCase())
   }
 
   const requestUser = async () => {
@@ -26,8 +26,8 @@ export default function UserMetamaskContextComp({ children }) {
         console.log("requesting user")
         const request: ["string"] = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
 
-        console.log("setting user:", request[0])
 
+        console.log("setting user:", request[0])
         setUserMetamask(request[0])
         setReqStatus(RequestStatus.success)
       } catch (e) {
@@ -57,7 +57,12 @@ export default function UserMetamaskContextComp({ children }) {
     }
 
     //Create account change listener 🔍
-    (window as any).ethereum.on('accountsChanged', () => { window.location.reload() });
+    (window as any).ethereum.on('accountsChanged', () => {
+
+      window.location.reload()
+      console.log("RHIS RAN")
+
+    });
 
     //Create account change listener 🔍
     (window as any).ethereum.on('connect', () => {

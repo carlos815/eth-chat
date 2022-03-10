@@ -7,7 +7,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ["Urbanist", "Helvetica", "Arial", "sans-serif"],
+      display: ["Arimo", "Helvetica", "Arial", "sans-serif"],
       body: ["IBM Plex Sans", "sans-serif"],
     },
 
@@ -23,6 +23,10 @@ module.exports = {
         700: "#6811BC", //40
         800: "#4E0D8D", //80
         900: "#4E0D8D", //100
+      },
+      gradient: {
+        start: "#7311D0",
+        end: "#AC55FF",
       },
       neutral: {
         200: "#f2f2f2", //05
@@ -40,6 +44,15 @@ module.exports = {
       },
     },
     extend: {
+      animation: {
+        grow: "grow 0.3s linear",
+      },
+      keyframes: {
+        grow: {
+          "0%": { "max-width": "0" },
+          "100%": { "max-width": "100%" },
+        },
+      },
       spacing: {
         nav: "61px",
         content: "calc(100vh-61px)",

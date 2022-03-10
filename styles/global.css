@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Urbanist:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=IBM+Plex+Sans:wght@400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -43,6 +43,10 @@ body {
   }
 
   .btn {
-    @apply hover:cursor-pointer hover:scale-105 transition-all bg-primary-600 rounded-lg px-4 py-2 font-bold  disabled:bg-neutral-500;
+    @apply hover:cursor-pointer  bg-primary-600 rounded-lg px-6 py-4 font-bold  disabled:bg-neutral-400 disabled:text-neutral-500;
+  }
+
+  .btn-small {
+    @apply hover:cursor-pointer  bg-primary-600 rounded-lg px-4 py-2 font-bold  disabled:bg-neutral-400 disabled:text-neutral-500;
   }
 }
