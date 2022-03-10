@@ -77,7 +77,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     document.addEventListener("click", (event: MouseEvent) => {
-      if (event.target.className.includes("newChatModal")) {
+      if ((event.target as any).className.includes("newChatModal")) {
         event.preventDefault();
         event.stopPropagation();
         (document.querySelector(".newChatModal") as any).close()
@@ -124,7 +124,7 @@ const Home: NextPage = () => {
           </div>
 
           <button className="fixed flex items-center justify-center bottom-0 m-8 h-16 w-16 bg-primary-600 rounded-full" onClick={() => {
-            document.querySelector(".newChatModal").showModal();
+            (document.querySelector(".newChatModal") as any).showModal();
             setModalOpen(true)
 
           }}><Image src={"/add.svg"} width="24" height={19}></Image></button>
