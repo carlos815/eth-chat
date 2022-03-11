@@ -61,7 +61,7 @@ const MessageInput = ({ onSendCallback, onErrorCallback }: MessageInputProps) =>
         <input contentEditable="true" className="peer  bg-neutral-700 border-t border-b border-neutral-600 py-6 px-8 focus:outline-none  
         " placeholder="Write a message..." onChange={handleInputChange} value={message} disabled={!userMetamask} />
         <span className=" 
-        
+            
         
         peer-focus:before:h-[2px]
         peer-focus:before:w-full
