@@ -4,11 +4,8 @@
 
 A chat with Metamask Integration.
 
-This was buit using Next.js, React, and Tailwind.
+This was built using Next.js, React, and Tailwind.
 
-The backend is Firebase.
-
+The backend is made with Firebase.
 
 ![Deploy with Vercel](https://raw.githubusercontent.com/carlos815/eth-chat/main/readme/screenshot.png)
-
-
