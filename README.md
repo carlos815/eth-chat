@@ -8,6 +8,6 @@ The backend is Firebase.
 
 [Live Version](https://eth-chat.vercel.app/)
 
-[![Deploy with Vercel](https://raw.githubusercontent.com/carlos815/eth-chat/main/readme/screenshot.png)]
+![Deploy with Vercel](https://raw.githubusercontent.com/carlos815/eth-chat/main/readme/screenshot.png)
 
 
