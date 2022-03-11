@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 
 import type { NextPage } from "next";
 import Chat from "../components/chat/Chat";
-import Login from "../components/Login";
 import { useUserMetamask } from "../context/userContextMetamask";
 import { getApps } from "firebase/app";
 import { getDatabase, onChildAdded, ref } from "firebase/database";

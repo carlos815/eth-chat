@@ -58,7 +58,7 @@ const MessageInput = ({ onSendCallback, onErrorCallback }: MessageInputProps) =>
 
     return <form className="flex flex-col   max-h-content w-full bg-neutral-700 relative" >
 
-        <input contentEditable="true" className="peer  bg-neutral-700 border-t border-b border-neutral-600 py-4 px-6 focus:outline-none  
+        <input contentEditable="true" className="peer  bg-neutral-700 border-t border-b border-neutral-600 py-6 px-8 focus:outline-none  
         " placeholder="Write a message..." onChange={handleInputChange} value={message} disabled={!userMetamask} />
         <span className=" 
         

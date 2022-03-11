@@ -10,7 +10,6 @@ import nowEpoch from "../../helpers/nowEpoch";
 import scrollTotheEnd from "../../helpers/scrollToTheEnd";
 import Chatbox from "../../components/chat/Chatbox";
 import MessageInput from "../../components/chat/MessageInput";
-import Login from "../../components/Login";
 import { useCurrentChat } from "../../context/currentChatContext";
 import ChatHeader from "./ChatboxHeader";
 import UserWriting from "./UserWriting";
@@ -97,7 +96,7 @@ export default function Chat() {
 
             {
                 !loading ? <>
-                    <ChatHeader address={currentChat} username={"Alias de usuario"} />
+                    <ChatHeader address={currentChat} username={"[Placehodler]"} />
 
                     <Chatbox allMessages={allMessages} ownUserName={userMetamask} scrollRef={chatbox} />
                     {isWriting && <UserWriting name={currentChat} />}

@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext } from 'react'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { RequestStatus } from '../helpers/types'
+import randomString from '../helpers/randomString'
 
 export const UserMetamaskContext = createContext({})
 
@@ -8,13 +9,19 @@ export const UserMetamaskContext = createContext({})
 export default function UserMetamaskContextComp({ children }) {
   const [reqStatus, setReqStatus] = useState<RequestStatus>(RequestStatus.idle)
 
+
   const [userMetamask, _setUserMetamask] = useState<string>(null)
   const setUserMetamask = (user: string) => {
     _setUserMetamask(user?.toLowerCase())
   }
 
-  const requestUser = async () => {
+  const requestUser = async (guestId: string) => {
     setReqStatus(RequestStatus.loading)
+    if (guestId) {
+      setUserMetamask(guestId)
+      setReqStatus(RequestStatus.success)
+      return
+    }
 
     const provider = await detectEthereumProvider();
 
@@ -77,8 +84,15 @@ export default function UserMetamaskContextComp({ children }) {
     }
   }, [])
 
+  const loginAsGuest = () => {
+
+    const generateRandomUserId = () => "GuestUser" + randomString(6)
+    requestUser(generateRandomUserId())
+
+  }
+
   return (
-    <UserMetamaskContext.Provider value={{ userMetamask, setUserMetamask, reqStatus, requestUser }}>
+    <UserMetamaskContext.Provider value={{ userMetamask, setUserMetamask, reqStatus, requestUser, loginAsGuest }}>
       {children}
     </UserMetamaskContext.Provider>
   )
