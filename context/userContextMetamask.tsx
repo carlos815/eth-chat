@@ -57,7 +57,7 @@ export default function UserMetamaskContextComp({ children }) {
     }
 
     //Create account change listener 🔍
-    (window as any).ethereum.on('accountsChanged', () => {
+    (window as any)?.ethereum?.on('accountsChanged', () => {
 
       window.location.reload()
       console.log("RHIS RAN")
@@ -65,13 +65,13 @@ export default function UserMetamaskContextComp({ children }) {
     });
 
     //Create account change listener 🔍
-    (window as any).ethereum.on('connect', () => {
+    (window as any)?.ethereum?.on('connect', () => {
       setUserMetamask((window as any).ethereum.selectedAddress)
     });
     return () => {
       //Remove account change listener
-      (window as any).ethereum?.removeListener('accountsChanged', () => { window.location.reload() });
-      (window as any).ethereum.on('connect', () => {
+      (window as any)?.ethereum?.removeListener('accountsChanged', () => { window.location.reload() });
+      (window as any)?.ethereum.on('connect', () => {
         setUserMetamask((window as any).ethereum.selectedAddress)
       });
     }
