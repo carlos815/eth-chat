@@ -2,7 +2,6 @@ import { getDatabase, push, ref, update } from "firebase/database";
 import { Message } from "../helpers/types";
 
 const sendMessage = async (chatId: string, message: Message, callback?: Function, errorCallback?: Function) => {
-//
     const db = getDatabase();
     const key = push(ref(db, "chats/messages/" + chatId)).key
 
@@ -16,5 +15,6 @@ const sendMessage = async (chatId: string, message: Message, callback?: Function
         if (errorCallback) errorCallback(e)
     }
 }
+
 
 export default sendMessage

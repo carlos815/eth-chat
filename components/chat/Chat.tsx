@@ -59,7 +59,7 @@ export default function Chat() {
 
                 //Check if user is writing
 
-                const isWritingRef = ref(db, `chats/isWriting/${currentChat.toLowerCase()}/${chatId}`)
+                const isWritingRef = ref(db, `chats/isWriting/${currentChat?.toLowerCase()}/${chatId}`)
                 off(isWritingRef)
                 onValue(isWritingRef, (snapshot) => {
                     if (snapshot.val() == null) {

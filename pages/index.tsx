@@ -13,14 +13,15 @@ import { useCurrentChat } from "../context/currentChatContext";
 import NewChatModal from "../components/modals/NewChatModal";
 import Image from "next/image";
 import LoginModal from "../components/modals/LoginModal";
+import receiveWelcomeMessage from "../firebase/receiveWelcomeMessage";
 
 
 const Home: NextPage = () => {
 
-  const { reqStatus, userMetamask, requestUser }: any = useUserMetamask()
+  const { reqStatus, userMetamask, requestUser, asGuest, }: any = useUserMetamask()
 
 
-  const { currentChat, setCurrentChat, newChatModalOpen, setNewChatModalOpen }: any = useCurrentChat()
+  const { currentChat, setCurrentChat, newChatModalOpen, setNewChatModalOpen, setChatId }: any = useCurrentChat()
 
   const [recentChats, setRecentChats] = useState<string[]>([])
 
@@ -75,6 +76,8 @@ const Home: NextPage = () => {
 
 
   useEffect(() => {
+
+
     document.addEventListener("click", (event: MouseEvent) => {
       if ((event.target as any).className.includes("newChatModal")) {
         event.preventDefault();
@@ -90,6 +93,17 @@ const Home: NextPage = () => {
     document.querySelector(".newChatModal").addEventListener('open', function () {
     });
   }, [])
+
+
+
+  useEffect(() => {
+    console.log("tgus ran", asGuest)
+    if (asGuest) {
+      console.log("tgus ran as guest")
+
+      receiveWelcomeMessage(["0x2D3f907b0cF2C7D3c2BA4Cbc72971081FfCea963", userMetamask], setChatId,)
+    }
+  }, [asGuest])
 
   const [modalOpen, setModalOpen] = useState(false)
 

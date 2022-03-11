@@ -9,7 +9,7 @@ const MessageBubble = ({ name, message, isOwnMessage, lastOfGroup, firstOfGroup,
         {header}
         <div className={`rounded-2xl  p-4 text-white  max-w-3xl ${!isOwnMessage ? "self-start bg-neutral-600" : "self-end bg-gradient-to-l from-primary-400 to-primary-700 text-base"} ${!isOwnMessage && lastOfGroup && "rounded-bl-none"} ${isOwnMessage && lastOfGroup && "rounded-br-none"}`}>
 
-            <p>{message !== "" ? message : "  "}</p>
+            <p dangerouslySetInnerHTML={message !== "" ? { __html: (message as string) } : { __html: " " }}></p>
         </div>
 
         {footer}

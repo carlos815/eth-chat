@@ -56,7 +56,7 @@ const createNewChat = async (memberAddresses: [string, string], setChatId: Funct
                 set(ref(db, "chats/members/" + newKey + "/" + address.toLowerCase()), true)
                 set(ref(db, "chats/users/" + address.toLowerCase() + "/" + newKey), true)
             })
-
+            return newKey
 
         }
     } catch (e) {

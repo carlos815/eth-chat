@@ -11,6 +11,8 @@ export default function UserMetamaskContextComp({ children }) {
 
 
   const [userMetamask, _setUserMetamask] = useState<string>(null)
+  const [asGuest, setAsGuest] = useState<boolean>(null)
+
   const setUserMetamask = (user: string) => {
     _setUserMetamask(user?.toLowerCase())
   }
@@ -78,21 +80,21 @@ export default function UserMetamaskContextComp({ children }) {
     return () => {
       //Remove account change listener
       (window as any)?.ethereum?.removeListener('accountsChanged', () => { window.location.reload() });
-      (window as any)?.ethereum.on('connect', () => {
+      (window as any)?.ethereum?.on('connect', () => {
         setUserMetamask((window as any).ethereum.selectedAddress)
       });
     }
   }, [])
 
   const loginAsGuest = () => {
-
     const generateRandomUserId = () => "GuestUser" + randomString(6)
-    requestUser(generateRandomUserId())
 
+    requestUser(generateRandomUserId())
+    setAsGuest(true)
   }
 
   return (
-    <UserMetamaskContext.Provider value={{ userMetamask, setUserMetamask, reqStatus, requestUser, loginAsGuest }}>
+    <UserMetamaskContext.Provider value={{ userMetamask, setUserMetamask, reqStatus, requestUser, loginAsGuest, asGuest }}>
       {children}
     </UserMetamaskContext.Provider>
   )
