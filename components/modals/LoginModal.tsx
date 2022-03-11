@@ -11,7 +11,7 @@ import Image from "next/image";
 const LoginModal = ({ }) => {
     const { reqStatus, requestUser, loginAsGuest }: any = useUserMetamask()
 
-    return <BaseModal className="top-1/2 -translate-y-1/2" title="Welcome to ETH CHAT" content="Did you even wanted to send messages to other Ethereum addresses? Yeah, me neither. But you can do that now with ETH Chat!" important open>
+    return <BaseModal className="top-1/2 -translate-y-1/2" title="Welcome to ETH CHAT" content="Did you ever wanted to send messages to other Ethereum addresses? Yeah, me neither. But you can do that now with ETH Chat!" important open>
         <>
 
             {reqStatus === RequestStatus.error && <div>Couln't connect ot metamask</div>}
