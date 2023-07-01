@@ -22,7 +22,7 @@ const LoginModal = ({ }) => {
                     requestUser()
                 }}
             >
-                {reqStatus === RequestStatus.loading ? <Image className="animate-spin" src={"/spinner.svg"} width="24" height={24} /> : "Login with Metamask"}
+                {reqStatus === RequestStatus.loading ? <Image alt="spinner" className="animate-spin" src={"/spinner.svg"} width="24" height={24} /> : "Login with Metamask"}
             </button>
             <button className="underline text-xs" onClick={loginAsGuest}>Or enter as guest (that's cool too...)</button>
         </>

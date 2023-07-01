@@ -140,7 +140,7 @@ const Home: NextPage = () => {
             (document.querySelector(".newChatModal") as any).showModal();
             setModalOpen(true)
 
-          }}><Image src={"/add.svg"} width="24" height={19}></Image></button>
+          }}><Image alt="alt Icon" src={"/add.svg"} width="24" height={19}></Image></button>
 
 
 

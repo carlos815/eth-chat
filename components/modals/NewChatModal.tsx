@@ -42,7 +42,7 @@ const NewChatModal = ({ className }) => {
             <input className={` mb-4 bg-neutral-700 p-2 focus:outline-none focus:ring-primary-500 focus:ring-1 rounded ${!isAddress && "ring-negative-500 ring-1"}`} value={address} onChange={onChange} placeholder="0x2D3f907b0cF2C7D3c2BA4Cbc72971081FfCea963" >
 
             </input>
-            {!isAddress && <div className="absolute flex gap-2 text-xs top-12 text-negative-500"><span>Not a valid address </span> <Image src={"/error.svg"} width="16" height={16} /> </div>}
+            {!isAddress && <div className="absolute flex gap-2 text-xs top-12 text-negative-500"><span>Not a valid address </span> <Image alt="error" src={"/error.svg"} width="16" height={16} /> </div>}
 
 
             <button className="btn" disabled={address === ""} onClick={handleClick}>Create New Chad</button>
